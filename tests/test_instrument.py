@@ -12,6 +12,9 @@ class InstrumentTests(unittest.TestCase):
     def test_from_rics(self):
 
         rics = ['RY.TO', 'RY_pa.TO', 'USDCAD', '.VIX', 'CLc1', 'SIZ0', 'NG']
+        instruments = [Instrument.from_ric(ric) for ric in rics]
 
-        for ric in rics:
-            print(Instrument.from_ric(ric))
+        for instrument in instruments:
+            print(str(instrument))
+        for instrument in instruments:
+            print(repr(instrument))

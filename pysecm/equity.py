@@ -1,4 +1,5 @@
 import re
+from datetime import date
 
 from pysecm import Instrument
 
@@ -15,8 +16,8 @@ class Equity(Instrument):
     _re_ric = rf'^{_re_ric_ticker}({_re_ric_cmn_suffix}|{_re_ric_pfd_suffix})?{_re_ric_exch_code}' \
               rf'({_re_ric_delisted_month})?$'
 
-    def __init__(self, ric: str):
-        super().__init__(ric=ric)
+    def __init__(self, ric: str, asof_date: (date, None) = None):
+        super().__init__(ric=ric, asof_date=asof_date)
 
     @classmethod
     def _is_valid_ric(cls, ric: str) -> bool:

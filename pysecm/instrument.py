@@ -1,12 +1,14 @@
 from abc import ABC, abstractmethod
+from datetime import date
 from typing import final, List, Type
 from itertools import chain
 
 
 class Instrument(ABC):
 
-    def __init__(self, ric: str):
+    def __init__(self, ric: str, asof_date: (date, None)):
         self.ric = ric
+        self.asof_date = asof_date
 
     def __str__(self):
         return f'{self.ric} [{self.__class__.__name__}]'
@@ -23,21 +25,22 @@ class Instrument(ABC):
 
     @classmethod
     @final
-    def from_ric(cls, ric: str) -> 'Instrument':
+    def from_ric(cls, ric: str, asof_date: (date, None) = None) -> 'Instrument':
         """
         Instantiate an instrument from a valid RIC
         :param ric: Reuters Instrument Code
+        :param asof_date: RIC as-of date
         :return: Instrument
         """
         try:
             # If _from_ric is defined for this class, use _from_ric
-            return cls._from_ric(ric)
+            return cls._from_ric(ric, asof_date=asof_date)
         except AttributeError:
             # Otherwise, search recursively for matching subclass
             matches = cls.get_class_by_ric(ric)
             if len(matches) == 1:
                 # If match found, call from_ric
-                return matches[0].from_ric(ric)
+                return matches[0].from_ric(ric, asof_date=asof_date)
             elif len(matches) == 0:
                 raise ValueError(f'Invalid RIC - {ric} did not match any known instruments')
             else:
@@ -46,13 +49,14 @@ class Instrument(ABC):
 
     @classmethod
     @abstractmethod
-    def _from_ric(cls, ric: str) -> 'Instrument':
+    def _from_ric(cls, ric: str, asof_date: (date, None) = None) -> 'Instrument':
         """
         Return an instrument
         If not implemented, from_ric will search recursively for a matching subclass using get_class_by_ric and call
         from_ric on the subclass
         Must be implemented for concrete types
         :param ric: Reuters Instrument Code
+        :param asof_date: RIC as-of date
         :return: Instrument
         """
         raise AttributeError('Abstract class method _from_ric not defined')
@@ -83,7 +87,7 @@ class Instrument(ABC):
         """
         Return a list of Instrument subclasses matching the formatting of a given RIC
         If not implemented, get_class_by_ric will call itself recursively on subclasses
-        Must be implemented for concrete types
+        If not implemented for concrete types, _is_valid_ric will be called
         :param ric: Reuters Instrument Code
         :return: List of matching Instrument types
         """

@@ -1,4 +1,6 @@
 import re
+from datetime import date
+
 from iso4217 import Currency as iso4217_Currency
 
 from pysecm import Instrument
@@ -10,14 +12,14 @@ class Currency(Instrument):
     _re_iso4217 = r'[A-Z]{1,3}'
     _re_ric = rf'^{_re_iso4217}{_re_iso4217}$'
 
-    def __init__(self, ric: str):
+    def __init__(self, ric: str, asof_date: (date, None) = None):
         if not Currency.is_valid_ric(ric):
             raise ValueError(f'Invalid RIC - {ric}')
-        super().__init__(ric=ric)
+        super().__init__(ric=ric, asof_date=asof_date)
 
     @classmethod
-    def _from_ric(cls, ric: str) -> object:
-        return Currency(ric=ric)
+    def _from_ric(cls, ric: str, asof_date: (date, None) = None) -> object:
+        return Currency(ric=ric, asof_date=asof_date)
 
     @classmethod
     def _is_valid_ric(cls, ric: str) -> bool:
