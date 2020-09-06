@@ -19,5 +19,5 @@ class Equity(Instrument):
         super().__init__(ric=ric)
 
     @classmethod
-    def is_valid_ric(cls, ric: str) -> bool:
+    def _is_valid_ric(cls, ric: str) -> bool:
         return re.match(Equity._re_ric, ric) is not None

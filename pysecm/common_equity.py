@@ -15,9 +15,9 @@ class CommonEquity(Equity):
         super().__init__(ric=ric)
 
     @classmethod
-    def from_ric(cls, ric: str) -> object:
+    def _from_ric(cls, ric: str) -> object:
         return CommonEquity(ric=ric)
 
     @classmethod
-    def is_valid_ric(cls, ric: str) -> bool:
+    def _is_valid_ric(cls, ric: str) -> bool:
         return re.match(CommonEquity._re_ric, ric) is not None
