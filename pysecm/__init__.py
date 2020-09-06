@@ -5,3 +5,5 @@ from .preferred_equity import PreferredEquity
 from .currency import Currency
 from .index import Index
 from .commodity import Commodity
+from .fixed_income import FixedIncome
+from .government import Government

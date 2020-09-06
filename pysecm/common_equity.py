@@ -11,7 +11,7 @@ class CommonEquity(Equity):
               rf'({Equity._re_ric_delisted_month})?$'
 
     def __init__(self, ric: str, asof_date: (date, None) = None):
-        if not CommonEquity.is_valid_ric(ric):
+        if not CommonEquity._is_valid_ric(ric):
             raise ValueError(f'Invalid RIC - {ric}')
         super().__init__(ric=ric, asof_date=asof_date)
 

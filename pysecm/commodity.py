@@ -13,7 +13,7 @@ class Commodity(Instrument):
     _re_ric = rf'^{_re_ric_ticker}({_re_ric_continuation_month}|{_re_ric_delivery_month})?$'
 
     def __init__(self, ric: str, asof_date: (date, None) = None):
-        if not Commodity.is_valid_ric(ric):
+        if not Commodity._is_valid_ric(ric):
             raise ValueError(f'Invalid RIC - {ric}')
         super().__init__(ric=ric, asof_date=asof_date)
 

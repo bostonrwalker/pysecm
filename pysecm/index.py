@@ -10,7 +10,7 @@ class Index(Instrument):
     _re_ric = r'^\.[A-Z][A-Z0-9]{1,15}$'  # Respect legacy 17-character RIC limit
 
     def __init__(self, ric: str, asof_date: (date, None) = None):
-        if not Index.is_valid_ric(ric):
+        if not Index._is_valid_ric(ric):
             raise ValueError(f'Invalid RIC - {ric}')
         super().__init__(ric=ric, asof_date=asof_date)
 

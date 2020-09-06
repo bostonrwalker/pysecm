@@ -13,7 +13,7 @@ class Currency(Instrument):
     _re_ric = rf'^{_re_iso4217}{_re_iso4217}$'
 
     def __init__(self, ric: str, asof_date: (date, None) = None):
-        if not Currency.is_valid_ric(ric):
+        if not Currency._is_valid_ric(ric):
             raise ValueError(f'Invalid RIC - {ric}')
         super().__init__(ric=ric, asof_date=asof_date)
 
