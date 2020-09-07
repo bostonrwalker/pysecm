@@ -1,9 +1,9 @@
 import re
 
-from pysecm import BaseRIC
+from pysecm.ric import RIC
 
 
-class CommodityRIC(BaseRIC):
+class CommodityRIC(RIC):
 
     # Regex
     _re_ric_ticker = r'1?[A-Z]{1,3}'

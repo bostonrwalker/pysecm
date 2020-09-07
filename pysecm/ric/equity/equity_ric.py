@@ -1,9 +1,9 @@
 import re
 
-from pysecm import BaseRIC
+from pysecm.ric import RIC
 
 
-class EquityRIC(BaseRIC):
+class EquityRIC(RIC):
 
     # Regexes
     _re_ric_ticker = r'[A-Z]{1,5}'

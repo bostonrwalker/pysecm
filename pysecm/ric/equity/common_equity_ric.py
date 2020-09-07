@@ -1,6 +1,6 @@
 import re
 
-from pysecm.equity_ric import EquityRIC
+from pysecm.ric.equity.equity_ric import EquityRIC
 
 
 class CommonEquityRIC(EquityRIC):

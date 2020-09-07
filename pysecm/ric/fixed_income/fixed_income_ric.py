@@ -1,7 +1,7 @@
-from pysecm import BaseRIC
+from pysecm.ric import RIC
 
 
-class FixedIncomeRIC(BaseRIC):
+class FixedIncomeRIC(RIC):
 
     # Regex
     _re_dom = r'(0[1-9]|[1-2][0-9]|3[0-1])'

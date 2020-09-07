@@ -1,6 +1,6 @@
 import re
 
-from pysecm import FixedIncomeRIC
+from pysecm.ric.fixed_income import FixedIncomeRIC
 
 
 class GovernmentRIC(FixedIncomeRIC):

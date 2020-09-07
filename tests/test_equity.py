@@ -2,7 +2,8 @@ import sys
 import unittest
 import logging
 
-from pysecm import EquityRIC, PreferredEquityRIC, CommonEquityRIC, BaseRIC
+from pysecm.ric import RIC
+from pysecm.ric.equity import EquityRIC, PreferredEquityRIC, CommonEquityRIC
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
@@ -17,9 +18,9 @@ class EquityTests(unittest.TestCase):
             logging.debug(f'Testing {ric}')
             self.assertTrue(CommonEquityRIC.is_valid_str(ric))
             self.assertTrue(EquityRIC.is_valid_str(ric))
-            self.assertTrue(BaseRIC.is_valid_str(ric))
+            self.assertTrue(RIC.is_valid_str(ric))
             self.assertFalse(PreferredEquityRIC.is_valid_str(ric))
-            self.assertEqual(CommonEquityRIC.from_str(ric), BaseRIC.from_str(ric))
+            self.assertEqual(CommonEquityRIC.from_str(ric), RIC.from_str(ric))
             self.assertEqual(CommonEquityRIC.from_str(ric), EquityRIC.from_str(ric))
 
 
@@ -31,9 +32,9 @@ class EquityTests(unittest.TestCase):
             logging.debug(f'Testing {ric}')
             self.assertTrue(PreferredEquityRIC.is_valid_str(ric))
             self.assertTrue(EquityRIC.is_valid_str(ric))
-            self.assertTrue(BaseRIC.is_valid_str(ric))
+            self.assertTrue(RIC.is_valid_str(ric))
             self.assertFalse(CommonEquityRIC.is_valid_str(ric))
-            self.assertEqual(PreferredEquityRIC.from_str(ric), BaseRIC.from_str(ric))
+            self.assertEqual(PreferredEquityRIC.from_str(ric), RIC.from_str(ric))
             self.assertEqual(PreferredEquityRIC.from_str(ric), EquityRIC.from_str(ric))
 
     def test_eq_rics_malformed(self):

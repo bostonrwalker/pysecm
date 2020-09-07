@@ -4,7 +4,7 @@ from itertools import chain
 import re
 
 
-class BaseRIC(ABC):
+class RIC(ABC):
     """
     Class for validating and representing RIC strings
     """
@@ -30,7 +30,7 @@ class BaseRIC(ABC):
 
     @classmethod
     @final
-    def from_str(cls, ric_str: str) -> 'BaseRIC':
+    def from_str(cls, ric_str: str) -> 'RIC':
         """
         Instantiate a RIC from a valid RIC string
         :param ric_str: Reuters Instrument Code
@@ -53,7 +53,7 @@ class BaseRIC(ABC):
 
     @classmethod
     @abstractmethod
-    def _from_str(cls, ric_str: str) -> 'BaseRIC':
+    def _from_str(cls, ric_str: str) -> 'RIC':
         """
         Return an instrument
         If not implemented, from_ric will search recursively for a matching subclass using get_class_by_ric and call
@@ -66,7 +66,7 @@ class BaseRIC(ABC):
 
     @classmethod
     @final
-    def get_class_by_str(cls, ric_str: str) -> List[Type['BaseRIC']]:
+    def get_class_by_str(cls, ric_str: str) -> List[Type['RIC']]:
         """
         Return a list of Instrument subclasses matching the formatting of a given RIC
         If _get_class_by_ric is not implemented, calls itself recursively for subclasses
@@ -86,7 +86,7 @@ class BaseRIC(ABC):
                 return [cls] if cls._is_valid_str(ric_str) else []
 
     @classmethod
-    def _get_class_by_str(cls, ric_str: str) -> List[Type['BaseRIC']]:
+    def _get_class_by_str(cls, ric_str: str) -> List[Type['RIC']]:
         """
         Return a list of Instrument subclasses matching the formatting of a given RIC
         If not implemented, get_class_by_ric will call itself recursively on subclasses

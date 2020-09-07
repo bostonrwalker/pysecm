@@ -1,9 +1,9 @@
 import re
 
-from pysecm import BaseRIC
+from pysecm.ric import RIC
 
 
-class IndexRIC(BaseRIC):
+class IndexRIC(RIC):
 
     # Regex
     _re_ric = r'^\.[A-Z][A-Z0-9]{1,15}$'  # Respect legacy 17-character RIC limit

@@ -1,9 +1,1 @@
-from .ric import BaseRIC
-from .equity_ric import EquityRIC
-from .common_equity_ric import CommonEquityRIC
-from .preferred_equity_ric import PreferredEquityRIC
-from .currency_ric import Currency
-from .index_ric import IndexRIC
-from .commodity_ric import CommodityRIC
-from .fixed_income_ric import FixedIncomeRIC
-from .government_ric import GovernmentRIC
+import pysecm.ric

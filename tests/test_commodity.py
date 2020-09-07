@@ -2,7 +2,8 @@ import sys
 import unittest
 import logging
 
-from pysecm import CommodityRIC, BaseRIC
+from pysecm.ric import RIC
+from pysecm.ric.commodity import CommodityRIC
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
@@ -47,7 +48,7 @@ class CommodityTests(unittest.TestCase):
         for ric in rics:
             logging.debug(f'Testing {ric}')
             self.assertTrue(CommodityRIC.is_valid_str(ric))
-            self.assertTrue(BaseRIC.is_valid_str(ric))
+            self.assertTrue(RIC.is_valid_str(ric))
 
     def test_cmdty_rics_malformed(self):
 

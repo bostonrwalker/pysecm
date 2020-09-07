@@ -2,7 +2,8 @@ import sys
 import unittest
 import logging
 
-from pysecm import GovernmentRIC, FixedIncomeRIC, BaseRIC
+from pysecm.ric import RIC
+from pysecm.ric.fixed_income import GovernmentRIC, FixedIncomeRIC
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
@@ -27,8 +28,8 @@ class TestFixedIncome(unittest.TestCase):
             logging.debug(f'Testing {ric}')
             self.assertTrue(GovernmentRIC.is_valid_str(ric))
             self.assertTrue(FixedIncomeRIC.is_valid_str(ric))
-            self.assertTrue(BaseRIC.is_valid_str(ric))
-            self.assertEqual(GovernmentRIC.from_str(ric), BaseRIC.from_str(ric))
+            self.assertTrue(RIC.is_valid_str(ric))
+            self.assertEqual(GovernmentRIC.from_str(ric), RIC.from_str(ric))
 
     def test_fi_govt_rics_malformed(self):
 

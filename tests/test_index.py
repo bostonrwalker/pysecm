@@ -2,7 +2,8 @@ import sys
 import unittest
 import logging
 
-from pysecm import IndexRIC, BaseRIC
+from pysecm.ric import RIC
+from pysecm.ric.index import IndexRIC
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
@@ -16,8 +17,8 @@ class IndexTests(unittest.TestCase):
         for ric in rics:
             logging.debug(f'Testing {ric}')
             self.assertTrue(IndexRIC.is_valid_str(ric))
-            self.assertTrue(BaseRIC.is_valid_str(ric))
-            self.assertEqual(IndexRIC.from_str(ric), BaseRIC.from_str(ric))
+            self.assertTrue(RIC.is_valid_str(ric))
+            self.assertEqual(IndexRIC.from_str(ric), RIC.from_str(ric))
 
     def test_index_rics_malformed(self):
 
