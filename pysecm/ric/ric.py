@@ -45,6 +45,9 @@ class RIC(ABC):
     def __ne__(self, other):
         return not self == other
 
+    def __hash__(self):
+        return hash(self.ric_str)
+
     @classmethod
     @final
     def get_class_by_str(cls, ric_str: str) -> List[Type['RIC']]:
