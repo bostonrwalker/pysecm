@@ -17,9 +17,5 @@ class GovernmentRIC(FixedIncomeRIC):
         super().__init__(ric_str=ric_str)
 
     @classmethod
-    def _from_str(cls, ric_str: str) -> object:
-        return GovernmentRIC(ric_str=ric_str)
-
-    @classmethod
     def _is_valid_str(cls, ric_str: str) -> bool:
         return re.match(GovernmentRIC._re_ric, ric_str) is not None

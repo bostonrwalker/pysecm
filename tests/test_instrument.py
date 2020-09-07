@@ -13,7 +13,7 @@ class InstrumentTests(unittest.TestCase):
 
         rics = ['RY.TO', 'RY_pa.TO', 'USDCAD', '.VIX', 'CLc1', 'SIZ0', 'NG', 'UST BILL 03-DEC-2020',
                 'CAGV 0.500 01-SEP-2025']
-        instruments = [RIC.from_str(ric) for ric in rics]
+        instruments = [RIC(ric) for ric in rics]
 
         for instrument in instruments:
             print('{: <40} {: <40}'.format(str(instrument), repr(instrument)))

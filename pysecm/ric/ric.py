@@ -9,6 +9,23 @@ class RIC(ABC):
     Class for validating and representing RIC strings
     """
 
+    # Override new method to return subclass
+    def __new__(cls, ric_str: str):
+        if len(cls.__subclasses__()) > 0:
+            # Search recursively for matching subclass
+            matches = cls.get_class_by_str(ric_str)
+            if len(matches) == 1:
+                # If match found, call from_ric
+                concrete_cls = matches[0]
+            elif len(matches) == 0:
+                raise ValueError(f'Invalid RIC string - "{ric_str}" did not match any known instruments')
+            else:
+                raise ValueError(f'Ambiguous RIC string - "{ric_str}" matched multiple known instruments: '
+                                 f'{" ".join([str(m) for m in matches])}')
+        else:
+            concrete_cls = cls
+        return object.__new__(concrete_cls)
+
     def __init__(self, ric_str: str):
         """
         :param ric_str: Reuters Instrument Code
@@ -27,42 +44,6 @@ class RIC(ABC):
 
     def __ne__(self, other):
         return not self == other
-
-    @classmethod
-    @final
-    def from_str(cls, ric_str: str) -> 'RIC':
-        """
-        Instantiate a RIC from a valid RIC string
-        :param ric_str: Reuters Instrument Code
-        :return: Instrument
-        """
-        try:
-            # If _from_ric is defined for this class, use _from_ric
-            return cls._from_str(ric_str)
-        except AttributeError:
-            # Otherwise, search recursively for matching subclass
-            matches = cls.get_class_by_str(ric_str)
-            if len(matches) == 1:
-                # If match found, call from_ric
-                return matches[0].from_str(ric_str)
-            elif len(matches) == 0:
-                raise ValueError(f'Invalid RIC string - "{ric_str}" did not match any known instruments')
-            else:
-                raise ValueError(f'Ambiguous RIC string - "{ric_str}" matched multiple known instruments: '
-                                 f'{" ".join([str(m) for m in matches])}')
-
-    @classmethod
-    @abstractmethod
-    def _from_str(cls, ric_str: str) -> 'RIC':
-        """
-        Return an instrument
-        If not implemented, from_ric will search recursively for a matching subclass using get_class_by_ric and call
-        from_ric on the subclass
-        Must be implemented for concrete types
-        :param ric: Reuters Instrument Code
-        :return: Instrument
-        """
-        raise AttributeError('Abstract class method _from_ric not defined')
 
     @classmethod
     @final

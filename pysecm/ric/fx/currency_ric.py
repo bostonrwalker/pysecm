@@ -16,10 +16,6 @@ class CurrencyRIC(RIC):
         super().__init__(ric_str=ric_str)
 
     @classmethod
-    def _from_str(cls, ric_str: str) -> object:
-        return CurrencyRIC(ric_str=ric_str)
-
-    @classmethod
     def _is_valid_str(cls, ric_str: str) -> bool:
         if re.match(CurrencyRIC._re_ric, ric_str) is None:
             return False

@@ -18,7 +18,7 @@ class IndexTests(unittest.TestCase):
             logging.debug(f'Testing {ric}')
             self.assertTrue(IndexRIC.is_valid_str(ric))
             self.assertTrue(RIC.is_valid_str(ric))
-            self.assertEqual(IndexRIC.from_str(ric), RIC.from_str(ric))
+            self.assertEqual(IndexRIC(ric), RIC(ric))
 
     def test_index_rics_malformed(self):
 

@@ -20,8 +20,8 @@ class EquityTests(unittest.TestCase):
             self.assertTrue(EquityRIC.is_valid_str(ric))
             self.assertTrue(RIC.is_valid_str(ric))
             self.assertFalse(PreferredEquityRIC.is_valid_str(ric))
-            self.assertEqual(CommonEquityRIC.from_str(ric), RIC.from_str(ric))
-            self.assertEqual(CommonEquityRIC.from_str(ric), EquityRIC.from_str(ric))
+            self.assertEqual(CommonEquityRIC(ric), RIC(ric))
+            self.assertEqual(CommonEquityRIC(ric), EquityRIC(ric))
 
 
     def test_eq_pfd_rics(self):
@@ -34,8 +34,8 @@ class EquityTests(unittest.TestCase):
             self.assertTrue(EquityRIC.is_valid_str(ric))
             self.assertTrue(RIC.is_valid_str(ric))
             self.assertFalse(CommonEquityRIC.is_valid_str(ric))
-            self.assertEqual(PreferredEquityRIC.from_str(ric), RIC.from_str(ric))
-            self.assertEqual(PreferredEquityRIC.from_str(ric), EquityRIC.from_str(ric))
+            self.assertEqual(PreferredEquityRIC(ric), RIC(ric))
+            self.assertEqual(PreferredEquityRIC(ric), EquityRIC(ric))
 
     def test_eq_rics_malformed(self):
 

@@ -18,7 +18,7 @@ class CurrencyTests(unittest.TestCase):
             logging.debug(f'Testing {ric}')
             self.assertTrue(CurrencyRIC.is_valid_str(ric))
             self.assertTrue(RIC.is_valid_str(ric))
-            self.assertEqual(CurrencyRIC.from_str(ric), RIC.from_str(ric))
+            self.assertEqual(CurrencyRIC(ric), RIC(ric))
 
     def test_ccy_rics_malformed(self):
 

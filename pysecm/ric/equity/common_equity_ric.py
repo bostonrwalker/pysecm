@@ -15,9 +15,5 @@ class CommonEquityRIC(EquityRIC):
         super().__init__(ric_str=ric_str)
 
     @classmethod
-    def _from_str(cls, ric_str: str) -> object:
-        return CommonEquityRIC(ric_str=ric_str)
-
-    @classmethod
     def _is_valid_str(cls, ric_str: str) -> bool:
         return re.match(CommonEquityRIC._re_ric, ric_str) is not None

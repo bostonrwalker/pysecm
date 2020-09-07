@@ -29,7 +29,7 @@ class TestFixedIncome(unittest.TestCase):
             self.assertTrue(GovernmentRIC.is_valid_str(ric))
             self.assertTrue(FixedIncomeRIC.is_valid_str(ric))
             self.assertTrue(RIC.is_valid_str(ric))
-            self.assertEqual(GovernmentRIC.from_str(ric), RIC.from_str(ric))
+            self.assertEqual(GovernmentRIC(ric), RIC(ric))
 
     def test_fi_govt_rics_malformed(self):
 

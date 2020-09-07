@@ -49,6 +49,7 @@ class CommodityTests(unittest.TestCase):
             logging.debug(f'Testing {ric}')
             self.assertTrue(CommodityRIC.is_valid_str(ric))
             self.assertTrue(RIC.is_valid_str(ric))
+            self.assertEqual(CommodityRIC(ric), RIC(ric))
 
     def test_cmdty_rics_malformed(self):
 
