@@ -33,7 +33,7 @@ class RIC(ABC):
         self.__ric_str = ric_str
 
     def __str__(self):
-        return f'{self.ric_str} [{re.sub("RIC$", "", self.__class__.__name__)}]'
+        return f'{self.__ric_str} [{re.sub("RIC$", "", self.__class__.__name__)}]'
 
     def __repr__(self):
         return f'{type(self).__module__}.{type(self).__qualname__}' \
@@ -47,7 +47,7 @@ class RIC(ABC):
 
     def __hash__(self):
         return hash(self.ric_str)
-    
+
     @property
     def ric_str(self):
         """
