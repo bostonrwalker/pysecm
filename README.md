@@ -11,6 +11,8 @@ Supported instruments:
 - FX (spot)
 - Indices
 
+The pysecm library performs basic validation of symbol formats and resolves asset classes
+
 Examples:
 ```
 > from pysecm.ric import RIC
