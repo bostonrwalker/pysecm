@@ -2,7 +2,7 @@ import sys
 import unittest
 import logging
 
-from pysecm import Equity, PreferredEquity, CommonEquity, Instrument
+from pysecm import EquityRIC, PreferredEquityRIC, CommonEquityRIC, BaseRIC
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
@@ -15,12 +15,12 @@ class EquityTests(unittest.TestCase):
 
         for ric in rics:
             logging.debug(f'Testing {ric}')
-            self.assertTrue(CommonEquity.is_valid_ric(ric))
-            self.assertTrue(Equity.is_valid_ric(ric))
-            self.assertTrue(Instrument.is_valid_ric(ric))
-            self.assertFalse(PreferredEquity.is_valid_ric(ric))
-            self.assertEqual(CommonEquity.from_ric(ric), Instrument.from_ric(ric))
-            self.assertEqual(CommonEquity.from_ric(ric), Equity.from_ric(ric))
+            self.assertTrue(CommonEquityRIC.is_valid_str(ric))
+            self.assertTrue(EquityRIC.is_valid_str(ric))
+            self.assertTrue(BaseRIC.is_valid_str(ric))
+            self.assertFalse(PreferredEquityRIC.is_valid_str(ric))
+            self.assertEqual(CommonEquityRIC.from_str(ric), BaseRIC.from_str(ric))
+            self.assertEqual(CommonEquityRIC.from_str(ric), EquityRIC.from_str(ric))
 
 
     def test_eq_pfd_rics(self):
@@ -29,12 +29,12 @@ class EquityTests(unittest.TestCase):
 
         for ric in rics:
             logging.debug(f'Testing {ric}')
-            self.assertTrue(PreferredEquity.is_valid_ric(ric))
-            self.assertTrue(Equity.is_valid_ric(ric))
-            self.assertTrue(Instrument.is_valid_ric(ric))
-            self.assertFalse(CommonEquity.is_valid_ric(ric))
-            self.assertEqual(PreferredEquity.from_ric(ric), Instrument.from_ric(ric))
-            self.assertEqual(PreferredEquity.from_ric(ric), Equity.from_ric(ric))
+            self.assertTrue(PreferredEquityRIC.is_valid_str(ric))
+            self.assertTrue(EquityRIC.is_valid_str(ric))
+            self.assertTrue(BaseRIC.is_valid_str(ric))
+            self.assertFalse(CommonEquityRIC.is_valid_str(ric))
+            self.assertEqual(PreferredEquityRIC.from_str(ric), BaseRIC.from_str(ric))
+            self.assertEqual(PreferredEquityRIC.from_str(ric), EquityRIC.from_str(ric))
 
     def test_eq_rics_malformed(self):
 
@@ -42,7 +42,7 @@ class EquityTests(unittest.TestCase):
 
         for ric in rics:
             logging.debug(f'Testing {ric}')
-            self.assertFalse(Equity.is_valid_ric(ric))
-            self.assertFalse(CommonEquity.is_valid_ric(ric))
-            self.assertFalse(PreferredEquity.is_valid_ric(ric))
+            self.assertFalse(EquityRIC.is_valid_str(ric))
+            self.assertFalse(CommonEquityRIC.is_valid_str(ric))
+            self.assertFalse(PreferredEquityRIC.is_valid_str(ric))
 

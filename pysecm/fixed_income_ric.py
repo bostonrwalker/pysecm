@@ -1,9 +1,7 @@
-from datetime import date
-
-from pysecm import Instrument
+from pysecm import BaseRIC
 
 
-class FixedIncome(Instrument):
+class FixedIncomeRIC(BaseRIC):
 
     # Regex
     _re_dom = r'(0[1-9]|[1-2][0-9]|3[0-1])'
@@ -12,5 +10,5 @@ class FixedIncome(Instrument):
     _re_ric_maturity_dt = rf'{_re_dom}\-{_re_mon}\-{_re_yr}'
     _re_ric_coupon_rate = r'[1-9]?[0-9]\.[0-9]{3}'
 
-    def __init__(self, ric: str, asof_date: (date, None) = None):
-        super().__init__(ric=ric, asof_date=asof_date)
+    def __init__(self, ric_str: str):
+        super().__init__(ric_str=ric_str)

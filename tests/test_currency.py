@@ -2,7 +2,7 @@ import sys
 import unittest
 import logging
 
-from pysecm import Currency, Instrument
+from pysecm import Currency, BaseRIC
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
@@ -15,9 +15,9 @@ class CurrencyTests(unittest.TestCase):
 
         for ric in rics:
             logging.debug(f'Testing {ric}')
-            self.assertTrue(Currency.is_valid_ric(ric))
-            self.assertTrue(Instrument.is_valid_ric(ric))
-            self.assertEqual(Currency.from_ric(ric), Instrument.from_ric(ric))
+            self.assertTrue(Currency.is_valid_str(ric))
+            self.assertTrue(BaseRIC.is_valid_str(ric))
+            self.assertEqual(Currency.from_str(ric), BaseRIC.from_str(ric))
 
     def test_ccy_rics_malformed(self):
 
@@ -25,4 +25,4 @@ class CurrencyTests(unittest.TestCase):
 
         for ric in rics:
             logging.debug(f'Testing {ric}')
-            self.assertFalse(Currency.is_valid_ric(ric))
+            self.assertFalse(Currency.is_valid_str(ric))

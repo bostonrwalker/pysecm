@@ -1,10 +1,9 @@
 import re
-from datetime import date
 
-from pysecm import Instrument
+from pysecm import BaseRIC
 
 
-class Equity(Instrument):
+class EquityRIC(BaseRIC):
 
     # Regexes
     _re_ric_ticker = r'[A-Z]{1,5}'
@@ -16,9 +15,9 @@ class Equity(Instrument):
     _re_ric = rf'^{_re_ric_ticker}({_re_ric_cmn_suffix}|{_re_ric_pfd_suffix})?{_re_ric_exch_code}' \
               rf'({_re_ric_delisted_month})?$'
 
-    def __init__(self, ric: str, asof_date: (date, None) = None):
-        super().__init__(ric=ric, asof_date=asof_date)
+    def __init__(self, ric_str: str):
+        super().__init__(ric_str=ric_str)
 
     @classmethod
-    def _is_valid_ric(cls, ric: str) -> bool:
-        return re.match(Equity._re_ric, ric) is not None
+    def _is_valid_str(cls, ric_str: str) -> bool:
+        return re.match(EquityRIC._re_ric, ric_str) is not None
