@@ -30,7 +30,7 @@ class RIC(ABC):
         """
         :param ric_str: Reuters Instrument Code
         """
-        self.ric_str = ric_str
+        self.__ric_str = ric_str
 
     def __str__(self):
         return f'{self.ric_str} [{re.sub("RIC$", "", self.__class__.__name__)}]'
@@ -47,6 +47,13 @@ class RIC(ABC):
 
     def __hash__(self):
         return hash(self.ric_str)
+    
+    @property
+    def ric_str(self):
+        """
+        :return: Reuters Instrument Code
+        """
+        return self.__ric_str
 
     @classmethod
     @final
